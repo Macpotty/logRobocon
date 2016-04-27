@@ -1,0 +1,3 @@
+# requirements/prod.txt
+-r prod.txt
+Django==1.9.5

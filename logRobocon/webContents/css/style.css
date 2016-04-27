@@ -1,0 +1,27 @@
+body {
+    background-image: url(../img/13.jpg);
+}
+
+.blank-50 {
+    height: 50px;
+}
+
+.blank-20 {
+    height: 20px;
+}
+
+.centerText {
+    text-align: center;
+}
+
+.btn-full {
+    width: 100%
+}
+
+.btn-right {
+    float: right;
+}
+
+.btn-left {
+    float: left;
+}

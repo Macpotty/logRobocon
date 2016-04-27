@@ -1,0 +1,2 @@
+#只安装运行必备模块
+-r requirements/prod.txt
