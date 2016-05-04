@@ -5999,7 +5999,7 @@ a.badge:hover {
     margin-bottom: 30px;
     color: inherit;
     background-color: #eee;
-    opacity: 1
+    opacity: 0.85
 }
 
 .jumbotron .h1,

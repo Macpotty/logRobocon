@@ -1,65 +1,90 @@
+# -*- coding: utf-8 -*-
+# @Author: Macpotty
+# @Date:   2016-05-04 21:07:28
+# @Last Modified by:   Macpotty
+# @Last Modified time: 2016-05-04 21:09:09
 from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
-from django.template import RequestContext
+from django.template import requestContext
 from django import forms
-from models import User
+from django.contrib.auth.models import User
+from logRobocon.libs.formsModel import *
 
 
 class LoginForm(forms.Form):
-    accountName = forms.CharField(label='用户名', max_length=50)
-    userPasswd = forms.CharField(label='Password',
-                                 max_length=50,
-                                 wiget=forms.PasswordInput())
+    username = forms.CharField(max_length=50,
+                               requestuired=True,
+                               widget=TextInputWidget(attrs={'placeholder': '用户名'}))
+    password = forms.CharField(max_length=50,
+                               requestuired=True,
+                               widget=PasswordInputWidget(attrs={'placeholder': 'Password'}))
 
 
 class RegistForm(LoginForm):
-    userName = forms.CharField(label='Real Name', max_length=50)
-    emailAddr = forms.EmailField(label='Email address', max_length=50)
+    last_name = forms.CharField(max_length=50,
+                                requestuired=True,
+                                widget=TextInputWidget(attrs={'placeholder': 'Real Name'}))
+    emailAddr = forms.EmailField(max_length=50,
+                                 requestuired=True,
+                                 widget=EmailInputWidget(attrs={'placeholder': 'Email'}))
+    verifyPasswd = forms.CharField(max_length=50,
+                                   requestuired=True,
+                                   widget=PasswordInputWidget(attrs={'placeholder': 'Password'}))
+
+    def is_valid(self):
+        valid = super(LoginForm, self).is_valid() or self.cleaned_data['verifyPasswd'] != self.cleaned_data['password']
+        if not valid:
+            return is_valid
 
 
-def register(req):
-    if req.method == 'POST':
-        userForm = RegistForm(req.POST)
+def register(request):
+    if request.method == 'POST':
+        userForm = RegistForm(request.POST)
         if userForm.is_valid():
-            userName = userForm.cleaned_data['userName']
-            userPasswd = userForm.cleaned_data['Password']
-            User.objects.create(userName=userName, userPasswd=userPasswd)
-            return HttpResponse('register successful.')
+            username = userForm.cleaned_data['username']
+            last_name = userForm.cleaned_data['last_name']
+            emailAddr = userForm.cleaned_data['emailAddr']
+            password = userForm.cleaned_data['password']
+            User.objects.create(username=username,
+                                email=emailAddr,
+                                password=password,
+                                last_name=last_name,
+                                )
+            return HttpResponseRedirect('/userGroup/index')
     else:
         userForm = RegistForm()
     return render_to_response('register.html',
-                              {'userName': userName},
-                              context_instance=RequestContext(req))
+                              {'userForm': userForm},
+                              context_instance=requestContext(request))
 
 
-def login(req):
-    if req.method == 'POST':
-        userForm = LoginForm(req.POST)
+def login(request):
+    if request.method == 'POST':
+        userForm = LoginForm(request.POST)
         if userForm.is_valid():
-            userName = userForm.cleaned_data['userName']
-            userPasswd = userForm.cleaned_data['Password']
-            verifyValue = User.objects.filter(username_exact=userName,
-                                              password_exact=userPasswd)
-            if verifyValue:
-                response = HttpResponseRedirect('/userGroup/index')
-                response.set_cookie('userName', userName, 10800)
-                return response
+            username = userForm.POST.get('username', '')
+            password = userForm.POST.get('password', '')
+            user = auth.authenticate(username=username, password=password)
+            if User is not None and user.is_active:
+                auth.login(request, user)
+                return render_to_response('/userGroup/index.html', requestContext(request))
             else:
-                return HttpResponseRedirect('/userGroup/login')
+                return HttpResponseRedirect('/userGroup/login',
+                                            requestContext(request, {'userForm': userForm, 'password_is_wrong': True}))
     else:
         userForm = LoginForm()
     return render_to_response('login.html',
-                              {'userName': userName},
-                              context_instance=RequestContext(req))
+                              requestContext(request, {'userForm': userForm}))
 
 
-def index(req):
-    userName = req.COOKIES.get('userName', '')
+@login_requestuired()
+def index(request):
+    accountName = request.COOKIES.get('accountName', '')
     return render_to_response('index.html',
-                              {'userName': userName})
+                              {'accountName': accountName})
 
 
-def logout(req):
+def logout(request):
     response = HttpResponse('logout successful.')
-    response.delete_cookie('userName')
+    response.delete_cookie('accountName')
     return response
