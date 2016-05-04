@@ -17,29 +17,28 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2">
-            </div>
+            <div class="col-md-2"></div>
             <div class="col-md-8">
                 <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="index-after.jsp">主页</a>
+                    </li>
                     <li>
-                        <a href="index-before.jsp">主页</a>
+                        <a href="MyList">##</a>
                     </li>
-                    <li class="disabled">
-                        <a href="#">##</a>
-                    </li>
-                    <li class="disabled">
-                        <a href="#">##</a>
+                    <li>
+                        <a href="MyPlan">##</a>
                     </li>
                     <li class="dropdown pull-right">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">你的私人定制<strong class="caret"></strong></a>
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">私人定制<strong class="caret"></strong></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="login.jsp">登录</a>
+                                <a href="/blog/modifyAccount">账户设置</a>
                             </li>
                             <li class="divider">
                             </li>
                             <li>
-                                <a href="login.jsp">账户设置</a>
+                                <a href="/blog/logout">退出</a>
                             </li>
                         </ul>
                     </li>
@@ -47,9 +46,8 @@
                 {% block content %}
                 {% endblock %}
             </div>
-            <div class="col-md-2">
-            </div>
         </div>
+        <div class="col-md-2"></div>
     </div>
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>

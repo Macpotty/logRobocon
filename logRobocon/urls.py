@@ -20,5 +20,5 @@ from logRobocon import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^userGroup/', include('logRobocon.libs.userGroup.urls')),
+    url(r'^blog/', include('logRobocon.apps.blog.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

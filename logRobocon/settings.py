@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "logRobocon.apps.blog",
-    "logRobocon.libs.userGroup",
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -126,3 +125,5 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),
     # '/var/www/static',
 )
+
+LOGIN_URL = '/blog/login/'
