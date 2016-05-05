@@ -1,0 +1,37 @@
+{% extends "base-after.html" %}
+{% block title %}
+    <title>logRobocon-用户设置</title>
+{% endblock %}
+{% block content %}
+    <form class="form-horizontal jumbotron" method="post" role="form">
+        <h2 class="centerText"><b>用户信息</b></h2>
+        <a class="btn btn-primary" href="/blog/changePasswd">修改密码</a>
+        <div class="blank-50"></div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <input type="email" class="form-control" placeholder="E-mail" name="E-mail" value="<%= user.getUserEmail() %>" id="inputEmail3">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <input type="text" class="form-control" placeholder="真实姓名" name="realName" value="<%= user.getRealName() %>" id="inputPassword3">
+            </div>
+        </div>
+        <div class="blank-20"></div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <a href="/blog/index" class="btn btn-primary btn-full">
+                    返回
+                </a>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-sccess btn-full">
+                    提交
+                </button>
+            </div>
+        </div>
+        <div class="blank-50"></div>
+    </form>
+{% endblock %}

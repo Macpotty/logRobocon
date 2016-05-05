@@ -1,19 +1,19 @@
-function check1() {
+function checkRegist() {
     with(document.all) {
-        if (input1.value != input2.value) {
+        if (registOrigin.value != registVerify.value) {
             alert("两次输入密码不同")
-            input1.value = "";
-            input2.value = "";
+            registOrigin.value = "";
+            registVerify.value = "";
         } else document.forms[0].submit();
     }
 }
 
-function check2() {
+function checkChange() {
     with(document.all) {
-        if (input3.value != input4.value) {
+        if (changeOrigin.value != changeVerify.value) {
             alert("两次输入密码不同")
-            input3.value = "";
-            input4.value = "";
+            changeOrigin.value = "";
+            changeVerify.value = "";
         } else document.forms[0].submit();
     }
 }
