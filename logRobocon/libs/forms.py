@@ -2,7 +2,7 @@
 # @Author: Macpotty
 # @Date:   2016-05-04 21:34:29
 # @Last Modified by:   Macpotty
-# @Last Modified time: 2016-05-04 22:04:16
+# @Last Modified time: 2016-05-05 18:07:39
 from logRobocon.libs.formsModel import *
 
 
@@ -18,12 +18,12 @@ class LoginForm(forms.Form):
 
 
 class RegistForm(LoginForm):
+    verifyPasswd = forms.CharField(max_length=50,
+                                   required=True,
+                                   widget=PasswordInputWidget(attrs={'placeholder': 'verify Password'}))
     last_name = forms.CharField(max_length=50,
                                 required=True,
                                 widget=TextInputWidget(attrs={'placeholder': 'Real Name'}))
     emailAddr = forms.EmailField(max_length=50,
                                  required=True,
                                  widget=EmailInputWidget(attrs={'placeholder': 'Email'}))
-    verifyPasswd = forms.CharField(max_length=50,
-                                   required=True,
-                                   widget=PasswordInputWidget(attrs={'placeholder': 'Password'}))

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # @Author: michael
 # @Date:   2016-04-29 02:50:03
-# @Last Modified by:   michael
-# @Last Modified time: 2016-04-29 03:08:21
+# @Last Modified by:   Macpotty
+# @Last Modified time: 2016-05-05 17:23:50
 from django import forms
 
 
@@ -18,7 +18,7 @@ class PasswordInputWidget(forms.PasswordInput):
         super(PasswordInputWidget, self).__init__(*args, **kwargs)
 
 
-class EmailInputWidget(forms.PasswordInput):
+class EmailInputWidget(forms.EmailInput):
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('attrs', {}).update({'class': 'form-control'})
         super(EmailInputWidget, self).__init__(*args, **kwargs)

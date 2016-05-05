@@ -6,7 +6,22 @@
     <form class="form-horizontal jumbotron" method="post" role="form">{% csrf_token %}
         <h2 class="centerText"><b>队员注册</b></h2>
         {% if userForm.errors %}
-        <h3 class="btn-right">请检查你的输入</h3>
+        <div class="alert alert-error text-center">  
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <h4>错误!</h4>请检查你的输入  
+        </div>  
+        {% endif %}
+        {% if not_verified %}
+        <div class="alert alert-error text-center">  
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <h4>错误!</h4>两次密码输入不一致,请检查你的输入  
+        </div>  
+        {% endif %}
+        {% if already_in_use %}
+        <div class="alert alert-error text-center">  
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <h4>错误!</h4>用户名已被注册  
+        </div>
         {% endif %}
         <div class="blank-50"></div>
         {% for field in userForm %}
@@ -19,7 +34,7 @@
         <div class="blank-20"></div>
         <div class="form-group">
             <div class="col-sm-12">
-                <button type="submit" onClick="check1();" class="btn btn-primary btn-full">
+                <button type="submit" class="btn btn-primary btn-full">
                     确认创建用户
                 </button>
             </div>
