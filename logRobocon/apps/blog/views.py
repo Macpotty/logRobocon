@@ -2,7 +2,7 @@
 # @Author: Macpotty
 # @Date:   2016-05-04 21:07:28
 # @Last Modified by:   Macpotty
-# @Last Modified time: 2016-05-05 22:40:25
+# @Last Modified time: 2016-05-08 22:37:49
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.template.context import RequestContext
@@ -10,7 +10,55 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.utils import IntegrityError
+from django.views.generic import ListView
 from logRobocon.libs.forms import *
+from logRobocon.apps.blog.models import Blogpost
+import time
+
+
+class LogList(ListView):
+    context_object_name = 'logList'
+    template_name = 'logList.html'
+    paginate_by = 15
+    model = Blogpost
+
+    def get_context_data(self, **kwargs):
+        context = super(LogList, self).get_context_data(**kwargs)
+        context['username'] = self.request.user.last_name
+        context['page_logList'] = True
+        return context
+
+
+@login_required()
+def logEdit(request):
+    if request.method == 'POST':
+        logForm = LogEditForm(request.POST)
+        if logForm.is_valid():
+            logTime = request.POST.get('logTime', '')
+            logStatus = request.POST.get('logStatus', '')
+            realName = request.POST.get('realName', '')
+            logContent = request.POST.get('logContent', '')
+            formState = request.POST.get('formState', '')
+            if formState == 'create':
+                Blogpost.objects.create(logTime=logTime,
+                                        logStatus=logStatus,
+                                        realName=realName,
+                                        logContent=logContent)
+            else:
+                objBlog = Blogpost.objects.get(id=int(formState))
+                objBlog.logTime = logTime
+                objBlog.logStatus = logStatus
+                objBlog.realName = realName
+                objBlog.logContent = logContent
+    else:
+        user = request.user
+        formState = request.GET.get('formState', '')
+        logForm = LogEditForm(initial={'realName': user.first_name + user.last_name,
+                                       'logTime': time.strftime("%Y-%m-%d %H:%M", time.localtime(time.time())),
+                                       'formState': formState})
+    return render_to_response('logEdit.html',
+                              RequestContext(request, {'logForm': logForm,
+                                                       'username': user.last_name}))
 
 
 def register(request):
@@ -69,7 +117,8 @@ def login(request):
 def index(request):
     if request.user.is_authenticated():
         return render_to_response('index-after.html',
-                                  RequestContext(request, {'username': request.user.last_name}))
+                                  RequestContext(request, {'username': request.user.last_name,
+                                                           'page_index': True}))
     else:
         return render_to_response('index.html')
 
@@ -109,7 +158,6 @@ def changePasswd(request):
 def modifyAccount(request):
     if request.method == 'POST':
         form = ModifyAccountForm(request.POST)
-        user = request.user
         if form.is_valid():
             first_name = request.POST.get('realName', '')[0]
             last_name = request.POST.get('realName', '')[1:]
@@ -119,6 +167,7 @@ def modifyAccount(request):
             user.set_email(emailAddr)
             return HttpResponseRedirect('/blog/index', RequestContext(request))
     else:
-        form = ChangePasswdForm()
-    return render_to_response('changePasswd.html',
+        user = request.user
+        form = ModifyAccountForm(initial={'emailAddr': user.email, 'realName': user.first_name + user.last_name})
+    return render_to_response('modifyAccount.html',
                               RequestContext(request, {'form': form}))

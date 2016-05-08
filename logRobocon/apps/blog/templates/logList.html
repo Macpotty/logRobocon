@@ -1,0 +1,72 @@
+{% extends "base-after.html" %}
+{% block title %}
+    <title>logRobocon-调车日志</title>
+{% endblock %}
+{% block content %}
+    <div class="jumbotron">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        状态
+                    </th>
+                    <th>
+                        提交人
+                    </th>
+                    <th>
+                        操作
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log in object_list %}
+                <tr>
+                    <td>
+                        {{ log.id }}
+                    </td>
+                    <td>
+                        {{ log.logTime }}
+                    </td>
+                    <td>
+                        {{ log.logStatus }}
+                    </td>
+                    <td>
+                        {{ log.realName }}
+                    </td>
+                    <td>
+                        <a href="/blog/logEdit/?formState={{ log.id }}">修改</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <div class="alert alert-warning alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                        ×
+                    </button>
+                    <h4>
+                        你好！
+                    </h4> <strong>亲爱的{{username}}，</strong>还没有任何日志喔 <a href="/blog/logEdit?formState=create" class="alert-link">点击添加</a>
+                </div>
+                {% endfor %}
+            </tbody>
+        </table>
+        <ul class="pagination">
+            <li {% if not page_obj.has_previous %} class="disabled" {% endif %}>
+                <a href="#">Prev</a>
+            </li>
+            {% for pageIndex in page_obj.paginator.page_range %}
+            <li {% if page_obj.number == pageIndex %} class="active" {% endif %}>
+                <a href="#">{{pageIndex}}</a>
+            </li>
+            {% endfor %}
+            <li {% if not page_obj.has_next %} class="disabled" {% endif %}>
+                <a href="#">Next</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

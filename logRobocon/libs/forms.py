@@ -2,7 +2,7 @@
 # @Author: Macpotty
 # @Date:   2016-05-04 21:34:29
 # @Last Modified by:   Macpotty
-# @Last Modified time: 2016-05-05 22:30:29
+# @Last Modified time: 2016-05-08 22:38:58
 from logRobocon.libs.formsModel import *
 
 
@@ -54,3 +54,22 @@ class ModifyAccountForm(forms.Form):
     realName = forms.CharField(max_length=50,
                                required=True,
                                widget=TextInputWidget(attrs={'placeholder': 'Real Name'}))
+
+
+class LogEditForm(forms.Form):
+    logTime = forms.DateTimeField(label=u"日期时间",
+                                  required=True,
+                                  widget=TextInputWidget(attrs={'id': 'logTime'}))
+    logStatus = forms.CharField(label=u"状态",
+                                max_length=50,
+                                required=True,
+                                widget=TextInputWidget(attrs={'id': 'logStatus'}))
+    realName = forms.CharField(label=u"提交人",
+                               max_length=50,
+                               required=True,
+                               widget=TextInputWidget(attrs={'id': 'realName'}))
+    logContent = forms.CharField(label=u"日志正文",
+                                 required=True,
+                                 widget=TextAreaWidget(attrs={'id': 'logContent'}))
+    formState = forms.CharField(max_length=50,
+                                widget=forms.HiddenInput)

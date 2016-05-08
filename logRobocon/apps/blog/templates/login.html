@@ -6,7 +6,7 @@
     <form class="form-horizontal jumbotron" method="post" role="form">{% csrf_token %}
         <h2 class="centerText"><b>队员登录</b></h2>
         {% if password_is_wrong %}
-        <div class="alert alert-error text-center">  
+        <div class="alert alert-danger text-center">  
             <button type="button" class="close" data-dismiss="alert">×</button>  
             <h4>错误!</h4>用户名或密码错误  
         </div>  
