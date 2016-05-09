@@ -16,6 +16,12 @@
 ### blueprint:
 >* 应当把自动生成日志作为核心业务。
 
+## 2016年05月10日
+### updates:
+>* 完成了日志的增删改操作，有待测试
+
+### blueprint:
+>* 接下来就剩下自动生成日志需要完成了
 
 ## 目录树结构：
 <pre>
@@ -41,9 +47,15 @@
 │   │   │   ├── __init__.py
 │   │   │   ├── migrations
 │   │   │   │   ├── 0001_initial.py
+│   │   │   │   ├── 0002_auto_20160508_0856.py
+│   │   │   │   ├── 0003_remove_blogpost_logid.py
+│   │   │   │   ├── 0004_blogpost_loggeneral.py
 │   │   │   │   ├── __init__.py
 │   │   │   │   └── __pycache__
 │   │   │   │       ├── 0001_initial.cpython-35.pyc
+│   │   │   │       ├── 0002_auto_20160508_0856.cpython-35.pyc
+│   │   │   │       ├── 0003_remove_blogpost_logid.cpython-35.pyc
+│   │   │   │       ├── 0004_blogpost_loggeneral.cpython-35.pyc
 │   │   │   │       └── __init__.cpython-35.pyc
 │   │   │   ├── models.py
 │   │   │   ├── __pycache__
@@ -55,9 +67,15 @@
 │   │   │   ├── templates
 │   │   │   │   ├── base-after.html
 │   │   │   │   ├── base-before.html
+│   │   │   │   ├── changePasswd.html
+│   │   │   │   ├── future.html
 │   │   │   │   ├── index-after.html
-│   │   │   │   ├── index-before.html
+│   │   │   │   ├── index.html
+│   │   │   │   ├── logEdit.html
 │   │   │   │   ├── login.html
+│   │   │   │   ├── logList.html
+│   │   │   │   ├── logShow.html
+│   │   │   │   ├── modifyAccount.html
 │   │   │   │   └── register.html
 │   │   │   ├── tests.py
 │   │   │   ├── urls.py
