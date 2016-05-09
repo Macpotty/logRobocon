@@ -1,0 +1,22 @@
+{% extends "base-after.html" %}
+{% block title %}
+    <title>logRobocon-即将到来</title>
+{% endblock %}
+{% block content %}
+    <div class="jumbotron">
+            <div class="page-header">
+                <h1>
+                    你好，{{ username }}. <small>被你发现这个地方了</small>
+                </h1>
+            </div>
+            <h2>
+                其实这个页面现在并没有什么卵功能
+            </h2>
+            <p>
+                不过欢迎你向我提出你的建议，同时我也在构思可以用这里来做些什么。
+            </p>
+            <a href="/blog/logList/?page=1">
+                返回
+            </a>
+    </div>
+{% endblock %}

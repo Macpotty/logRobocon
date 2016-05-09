@@ -4,6 +4,8 @@
 {% endblock %}
 {% block content %}
     <div class="jumbotron">
+        <h2 class="centerText"><b>日志列表</b></h2>
+        <div class="blank-20"></div>
         <table class="table">
             <thead>
                 <tr>
@@ -14,7 +16,7 @@
                         Date
                     </th>
                     <th>
-                        状态
+                        简述
                     </th>
                     <th>
                         提交人
@@ -26,21 +28,22 @@
             </thead>
             <tbody>
                 {% for log in object_list %}
-                <tr>
+                <tr class="{% if log.logGeneral == 'success' %} success {% elif log.logGeneral == 'warning' %} warning {% else %} danger {% endif %}">
                     <td>
-                        {{ log.id }}
+                        <a href="/blog/logShow/?logId={{ log.id }}&page={{ page_obj.number }}">{{ log.id }}</a>
                     </td>
                     <td>
-                        {{ log.logTime }}
+                        <a href="/blog/logShow/?logId={{ log.id }}&page={{ page_obj.number }}">{{ log.logTime }}</a>
                     </td>
                     <td>
-                        {{ log.logStatus }}
+                        <a href="/blog/logShow/?logId={{ log.id }}&page={{ page_obj.number }}">{{ log.logStatus }}</a>
                     </td>
                     <td>
-                        {{ log.realName }}
+                        <a href="/blog/logShow/?logId={{ log.id }}&page={{ page_obj.number }}">{{ log.realName }}</a>
                     </td>
                     <td>
-                        <a href="/blog/logEdit/?formState={{ log.id }}">修改</a>
+                        <a href="/blog/logEdit/?formState={{ log.id }}&page={{ page_obj.number }}">修改</a>
+                        <a url="/blog/logDelete/?formState={{ log.id }}&page={{ page_obj.number }}" class="delVerify btn btn-link">删除</a> 
                     </td>
                 </tr>
                 {% empty %}
@@ -56,17 +59,29 @@
             </tbody>
         </table>
         <ul class="pagination">
-            <li {% if not page_obj.has_previous %} class="disabled" {% endif %}>
-                <a href="#">Prev</a>
+            {% if not page_obj.has_previous %}
+            <li class="disabled">
+                <a>Prev</a>
             </li>
+            {% else %}
+            <li>
+                <a href="/blog/logList/?page={{page_obj.previous_page_number}}">Prev</a>
+            </li>
+            {% endif %}
             {% for pageIndex in page_obj.paginator.page_range %}
             <li {% if page_obj.number == pageIndex %} class="active" {% endif %}>
-                <a href="#">{{pageIndex}}</a>
+                <a href="/blog/logList/?page={{pageIndex}}">{{pageIndex}}</a>
             </li>
             {% endfor %}
-            <li {% if not page_obj.has_next %} class="disabled" {% endif %}>
-                <a href="#">Next</a>
+            {% if not page_obj.has_next %}
+            <li class="disabled">
+                <a>Next</a>
             </li>
+            {% else %}
+            <li>
+                <a href="/blog/logList/?page={{page_obj.next_page_number}}">Next</a>
+            </li>
+            {% endif %}
         </ul>
     </div>
 {% endblock %}

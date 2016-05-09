@@ -2,7 +2,7 @@
 # @Author: Macpotty
 # @Date:   2016-05-04 21:34:29
 # @Last Modified by:   Macpotty
-# @Last Modified time: 2016-05-08 22:38:58
+# @Last Modified time: 2016-05-10 03:41:48
 from logRobocon.libs.formsModel import *
 
 
@@ -73,3 +73,5 @@ class LogEditForm(forms.Form):
                                  widget=TextAreaWidget(attrs={'id': 'logContent'}))
     formState = forms.CharField(max_length=50,
                                 widget=forms.HiddenInput)
+    CHOICES = (('success', '成功',), ('warning', '存在问题',), ('danger', '失败',))
+    logGeneral = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)

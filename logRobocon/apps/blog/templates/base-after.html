@@ -26,8 +26,8 @@
                     <li {% if page_logList %} class="active" {% endif %}>
                         <a href="/blog/logList">日志</a>
                     </li>
-                    <li {% if page_whatever %} class="active" {% endif %}>
-                        <a href="MyPlan">##</a>
+                    <li {% if page_future %} class="active" {% endif %}>
+                        <a href="/blog/future">##</a>
                     </li>
                     <li class="dropdown pull-right">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">{{username}}<strong class="caret"></strong></a>
@@ -36,7 +36,7 @@
                                 <a href="/blog/modifyAccount">账户设置</a>
                             </li>
                             <li>
-                                <a href="/blog/logEdit?formState=create">新建日志</a>
+                                <a href="/blog/logEdit?formState=create&page=1">新建日志</a>
                             </li>
                             <li class="divider">
                             </li>

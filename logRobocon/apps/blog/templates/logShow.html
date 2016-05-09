@@ -1,0 +1,25 @@
+{% extends "base-after.html" %}
+{% block title %}
+    <title>logRobocon-调车日志</title>
+{% endblock %}
+{% block content %}
+    <div class="jumbotron">
+            <div class="page-header">
+                <h1>
+                    {{ objBlog.logTime }} <small>结果：{% if objBlog.logGeneral == 'success' %} 成功 {% elif objBlog.logGeneral == 'warning' %} 存在问题 {% else %} 失败 {% endif %}</small>
+                </h1>
+            </div>
+            <h2>
+                {{ objBlog.logStatus }}
+            </h2>
+            <p>
+                {{ objBlog.logContent }}
+            </p>
+            <h3 class="text-right text-info">
+                {{ objBlog.realName }}
+            </h3> 
+            <a href="/blog/logList/?page={{ page }}">
+                返回
+            </a>
+    </div>
+{% endblock %}
