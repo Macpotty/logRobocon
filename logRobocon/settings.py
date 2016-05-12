@@ -25,7 +25,7 @@ SECRET_KEY = 'n#h*jyt94v6nynd48rvh6ld4-ycumhc0hipw#=qljh1s9szxe5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.10.151']
 
 
 # Application definition
@@ -77,8 +77,14 @@ WSGI_APPLICATION = 'logRobocon.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'logrobocon',
+        'USER': 'root',
+        'PASSWORD': '960627Xc!',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': 'SET storage_engine-INNODB, 'character_set_connection=utf8, 'collation_connection=utf8_unicode_ci
     }
 }
 
@@ -105,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'zh-cn'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Shanghai'
 

@@ -199,6 +199,7 @@ def changePasswd(request):
 
 @login_required()
 def modifyAccount(request):
+    user = request.user
     if request.method == 'POST':
         form = ModifyAccountForm(request.POST)
         if form.is_valid():
@@ -210,7 +211,6 @@ def modifyAccount(request):
             user.set_email(emailAddr)
             return HttpResponseRedirect('/blog/index', RequestContext(request))
     else:
-        user = request.user
         form = ModifyAccountForm(initial={'emailAddr': user.email, 'realName': user.first_name + user.last_name})
     return render_to_response('modifyAccount.html',
                               RequestContext(request, {'form': form}))
