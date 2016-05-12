@@ -83,8 +83,6 @@ DATABASES = {
         'PASSWORD': '960627Xc!',
         'HOST': 'localhost',
         'PORT': '3306',
-        'OPTIONS': {
-            'init_command': 'SET storage_engine-INNODB, 'character_set_connection=utf8, 'collation_connection=utf8_unicode_ci
     }
 }
 
