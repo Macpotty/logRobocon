@@ -2,11 +2,7 @@
 # @Author: Macpotty
 # @Date:   2016-05-04 21:07:28
 # @Last Modified by:   Macpotty
-<<<<<<< HEAD
-# @Last Modified time: 2016-05-21 15:35:00
-=======
-# @Last Modified time: 2016-05-10 22:57:50
->>>>>>> bed3c3de3d9819841e4a31c72b1d0e098dedf387
+# @Last Modified time: 2016-05-21 17:05:03
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.template.context import RequestContext
