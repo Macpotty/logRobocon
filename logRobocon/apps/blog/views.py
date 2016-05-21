@@ -2,7 +2,7 @@
 # @Author: Macpotty
 # @Date:   2016-05-04 21:07:28
 # @Last Modified by:   Macpotty
-# @Last Modified time: 2016-05-10 04:38:42
+# @Last Modified time: 2016-05-21 15:35:00
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.template.context import RequestContext
@@ -206,9 +206,10 @@ def modifyAccount(request):
             first_name = request.POST.get('realName', '')[0]
             last_name = request.POST.get('realName', '')[1:]
             emailAddr = request.POST.get('emailAddr', '')
-            user.set_first_name(first_name)
-            user.set_last_name(last_name)
-            user.set_email(emailAddr)
+            user.first_name = first_name
+            user.last_name = last_name
+            user.email = emailAddr
+            user.save()
             return HttpResponseRedirect('/blog/index', RequestContext(request))
     else:
         form = ModifyAccountForm(initial={'emailAddr': user.email, 'realName': user.first_name + user.last_name})

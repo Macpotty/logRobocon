@@ -1,4 +1,5 @@
 # requirements/common.txt
 -r common.
 Django==1.9.5
+pymysql==0.7.3
 
