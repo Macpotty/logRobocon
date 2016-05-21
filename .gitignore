@@ -60,6 +60,7 @@ docs/_build/
 
 # PyBuilder
 target/
+__pychache__/
 
 #Ipython Notebook
 .ipynb_checkpoints

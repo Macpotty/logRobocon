@@ -2,7 +2,11 @@
 # @Author: Macpotty
 # @Date:   2016-05-04 21:07:28
 # @Last Modified by:   Macpotty
+<<<<<<< HEAD
 # @Last Modified time: 2016-05-21 15:35:00
+=======
+# @Last Modified time: 2016-05-10 22:57:50
+>>>>>>> bed3c3de3d9819841e4a31c72b1d0e098dedf387
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.template.context import RequestContext
@@ -201,6 +205,7 @@ def changePasswd(request):
 def modifyAccount(request):
     user = request.user
     if request.method == 'POST':
+        user = request.user
         form = ModifyAccountForm(request.POST)
         if form.is_valid():
             first_name = request.POST.get('realName', '')[0]
