@@ -2,7 +2,7 @@
 # @Author: Macpotty
 # @Date:   2016-04-28 03:47:19
 # @Last Modified by:   Macpotty
-# @Last Modified time: 2016-05-10 04:24:34
+# @Last Modified time: 2016-05-22 18:12:26
 from django.conf.urls import url
 from logRobocon.apps.blog import views
 

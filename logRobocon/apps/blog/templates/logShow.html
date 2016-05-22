@@ -12,9 +12,8 @@
             <h2>
                 {{ objBlog.logStatus }}
             </h2>
-            <p>
-                {{ objBlog.logContent }}
-            </p>
+            <hr>
+            {{ objBlog.logContent|safe }}
             <h3 class="text-right text-info">
                 {{ objBlog.realName }}
             </h3> 

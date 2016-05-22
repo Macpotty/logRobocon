@@ -22,4 +22,3 @@ $(".delVerify").click(function(){
     if(confirm("Confirm?"))
         window.location.assign($(this).attr("url"));
 });
-
